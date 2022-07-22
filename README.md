@@ -26,6 +26,7 @@ The `run`, `destroy`, `info`, and `status` commands require access to a Nomad cl
 
 > **Warning**
 > Running services such as Nomad on a publicly accessible port without authentication is a decidedly bad idea.
+> 
 > Consult with your security team to define an access policy that meets your organization's security demands.
 
 <small>GitHub Actions run on a publicly-known list of [IP addresses](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#ip-addresses).

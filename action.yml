@@ -7,7 +7,7 @@ inputs:
   version:
     description: "The nomad-pack version to install and add to PATH. Supports semver versioning."
     required: true
-    default: "latest"
+    default: "0.0.1-techpreview2"
 outputs:
   version:
     description: "The nomad-pack version that was installed and added to PATH."

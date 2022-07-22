@@ -25,7 +25,7 @@ jobs:
         uses: ksatirli/setup-nomad-pack@v1
         id: setup
         with:
-          version: 'latest'
+          version: '0.0.1-techpreview2'
 
       - name: Print version output
         run: echo "${{ steps.setup.outputs.version }}"

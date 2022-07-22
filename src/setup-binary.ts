@@ -10,12 +10,12 @@ import {ok} from "assert";
 const USER_AGENT = "setup-nomad-pack (GitHub Actions)";
 const BINARY_NAME = "nomad-pack";
 
-export async function setupNomadPack() {
+export async function setupBinary() {
   const versionSpec = core.getInput("version");
 
   let binaryPath = await fetchBinary(versionSpec);
 
-  core.info(`Adding nomad-pack to PATH.`);
+  core.info(`Adding ` + BINARY_NAME + ` to PATH.`);
   core.addPath(binaryPath);
 
   let binary = await io.which(BINARY_NAME);

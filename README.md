@@ -1,9 +1,6 @@
 # setup-nomad-pack
 
-The `hashicorp/setup-nomad-pack` action is a JavaScript action that sets up the `nomad-pack` CLI in your GitHub Actions workflow by adding the binary to `PATH`.
-
-After you've used the action, subsequent steps in the same job can run arbitrary `nomad-pack` commands using [the GitHub Actions `run` syntax](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun).
-This allows (most) `nomad-pack` commands to work exactly like they do on a local command line interface.
+The `hashicorp/setup-nomad-pack` Action sets up the `nomad-pack` CLI in your GitHub Actions workflow by adding the binary to `PATH`.
 
 ## Table of Contents
 

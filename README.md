@@ -5,7 +5,36 @@ The `hashicorp/setup-nomad-pack` action is a JavaScript action that sets up the 
 After you've used the action, subsequent steps in the same job can run arbitrary `nomad-pack` commands using [the GitHub Actions `run` syntax](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun).
 This allows (most) `nomad-pack` commands to work exactly like they do on a local command line interface.
 
-## Example Workflow
+## Table of Contents
+
+- [setup-nomad-pack](#setup-nomad-pack)
+  - [Table of Contents](#table-of-contents)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+  - [Author Information](#author-information)
+  - [License](#license)
+
+## Requirements
+
+This GitHub Actions supports all commands that are available in the `nomad-pack` CLI.
+
+The `run`, `destroy`, `info`, and `status` commands require access to a Nomad cluster, as defined through the environment variable `NOMAD_ADDR` (and optionally: `NOMAD_TOKEN`).
+
+## Usage
+
+1.) Create GitHub Actions Secrets by going to the repository's _Settings_ tab, followed by expanding the _Secrets_ sidebar, and finally _Actions_.
+
+- Set the `NOMAD_ADDR` to the IP-address or hostname of a Nomad cluster that is routable for GitHub Actions Runners.
+- Set the `NOMAD_TOKEN` to a token with appropriate permissions to carry out Pack-specific operations on a Nomad cluster.
+
+> **Warning**
+> Running services such as Nomad on a publicly accessible port without authentication is a decidedly bad idea.
+> Consult with your security team to define an access policy that meets your organization's security demands.
+
+<small>GitHub Actions run on a publicly-known list of [IP addresses](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#ip-addresses).
+This data may be retrieved through [HashiCorp Terraform](https://terraform.io/), using the [ip_ranges data source](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/ip_ranges), allowing you to make IP-address _one_ of the security considerations.</small>
+
+2.) Create a GitHub Actions Workflow file (e.g.: `.github/workflows/nomad-pack.yml):
 
 ```yaml
 name: nomad-pack
@@ -22,26 +51,43 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup `nomad-pack`
-        uses: ksatirli/setup-nomad-pack@v1
+        # TODO: define `v1`
+        uses: ksatirli/setup-nomad-pack@0.1.3
         id: setup
         with:
-          version: '0.0.1-techpreview2'
+          version: "0.0.1-techpreview2"
 
-      - name: Print version output
-        run: echo "${{ steps.setup.outputs.version }}"
+      - name: Run `nomad-pack info` for `simple_service`
+        run: "nomad-pack info ./packs/simple_service"
 
-      - name: Run `nomad-pack version`
-        run: nomad-pack version
+      - name: Run `nomad-pack run` for `simple_service`
+        run: "nomad-pack run ./packs/simple_service"
+        env:
+          NOMAD_ADDR: "${{ secrets.NOMAD_ADDR }}"
+          NOMAD_TOKEN: "${{ secrets.NOMAD_TOKEN }}"
+        continue-on-error: true
 ```
 
+In the above example, the following definitions have been set.
+
+- The event trigger has been set to `push`. For a complete list, see [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows).
+- The origin of this GitHub Action has been set as `ksatirli/setup-nomad-pack@0.1.3`. For newer versions, see the [Releases](https://github.com/ksatirli/setup-nomad-pack/releases).
+- The version of `nomad-pack` to setup has been set as `0.0.1-techpreview2`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad-pack/).
+- The pack to deploy has been set as `./packs/simple_service`
+
+These definitions may require updating to suit your deployment.
+
 ## Inputs
+
+This section contains a list of all inputs that may be set for this Action.
 
 - `version` - (required) The version of `nomad-pack` to install. Supports [semver](https://www.npmjs.com/package/semver) versioning. Defaults to `latest`.
 
 ## Outputs
 
-- `version` -  The version of `nomad-pack` that was installed.
+This section contains a list of all outputs that can be consumed from this Action.
 
+- `version` -  The version of `nomad-pack` that was installed.
 
 ## Author Information
 

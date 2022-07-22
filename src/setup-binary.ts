@@ -32,9 +32,7 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
 
   let binaryPath: string;
 
-  core.info(
-    `Finding an application version that matches version spec '${versionSpec}'.`
-  );
+  core.info(`Finding an application version that matches version spec '${versionSpec}'.`);
   let release = await hc.getRelease(BINARY_NAME, versionSpec, USER_AGENT);
 
   const version = release.version;
@@ -46,11 +44,10 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
   core.debug(`Cache tool name: ${cacheToolName}`);
 
   if (binaryPath) {
-    core.info(
-      `Found ` + BINARY_NAME + ` ${version} in cache at ${binaryPath}.`
-    );
+    core.info(`Found ` + BINARY_NAME + ` ${version} in cache at ${binaryPath}.`);
     return binaryPath;
   }
+
   core.info(BINARY_NAME + ` ${version} not found in cache.`);
 
   core.info(`Getting download URL for ` + BINARY_NAME + ` ${version}.`);

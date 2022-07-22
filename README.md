@@ -16,3 +16,4 @@ HashiCorp [nomad-pack](https://www.nomadproject.io) in your GitHub Actions workf
 ## Outputs
 
 - `version` -  The version of `nomad-pack` that was installed.
+

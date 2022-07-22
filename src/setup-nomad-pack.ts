@@ -8,51 +8,54 @@ import path from "path";
 import {ok} from "assert";
 
 const USER_AGENT = "setup-nomad-pack (GitHub Actions)";
+const BINARY_NAME = "nomad-pack";
 
 export async function setupNomadPack() {
-  const versionSpec = core.getInput("packer-version");
+  const versionSpec = core.getInput("version");
 
-  let packerPath = await fetchPacker(versionSpec);
+  let binaryPath = await fetchBinary(versionSpec);
 
-  core.info(`Adding Packer to PATH.`);
-  core.addPath(packerPath);
+  core.info(`Adding nomad-pack to PATH.`);
+  core.addPath(binaryPath);
 
-  let packer = await io.which("packer");
-  let packerVersion = (cp.execSync(`${packer} version`) || "").toString();
-  core.info(packerVersion);
+  let binary = await io.which(BINARY_NAME);
+  let binaryVersion = (cp.execSync(`${binary} version`) || "").toString();
+  core.info(binaryVersion);
 
-  core.setOutput("packer-version", parsePackerVersion(packerVersion));
+  core.setOutput("version", parseVersion(binaryVersion));
 }
 
-export async function fetchPacker(versionSpec: string): Promise<string> {
+export async function fetchBinary(versionSpec: string): Promise<string> {
   const osPlatform = sys.getPlatform();
   const osArch = sys.getArch();
   const tmpDir = getTempDir();
 
-  let packerPath: string;
+  let binaryPath: string;
 
   core.info(
-    `Finding a Packer version that matches version spec '${versionSpec}'.`
+    `Finding an application version that matches version spec '${versionSpec}'.`
   );
-  let release = await hc.getRelease("packer", versionSpec, USER_AGENT);
+  let release = await hc.getRelease(BINARY_NAME, versionSpec, USER_AGENT);
 
   const version = release.version;
-  core.info(`Found Packer ${version}.`);
+  core.info(`Found ` + BINARY_NAME + ` ${version}.`);
 
-  core.info(`Checking cache for Packer ${version}.`);
-  const cacheToolName = `packer_${osPlatform}`;
-  packerPath = tc.find(cacheToolName, version);
+  core.info(`Checking cache for ` + BINARY_NAME + ` ${version}.`);
+  const cacheToolName = BINARY_NAME + `_${osPlatform}`;
+  binaryPath = tc.find(cacheToolName, version);
   core.debug(`Cache tool name: ${cacheToolName}`);
 
-  if (packerPath) {
-    core.info(`Found Packer ${version} in cache at ${packerPath}.`);
-    return packerPath;
+  if (binaryPath) {
+    core.info(
+      `Found ` + BINARY_NAME + ` ${version} in cache at ${binaryPath}.`
+    );
+    return binaryPath;
   }
-  core.info(`Packer ${version} not found in cache.`);
+  core.info(BINARY_NAME + ` ${version} not found in cache.`);
 
-  core.info(`Getting download URL for Packer ${version}.`);
+  core.info(`Getting download URL for ` + BINARY_NAME + ` ${version}.`);
   let build = release.getBuild(osPlatform, osArch);
-  core.debug(`Download url: ${build.url}`);
+  core.debug(`Download URL: ${build.url}`);
 
   core.info(`Downloading ${build.filename}.`);
   let downloadPath = path.join(tmpDir, build.filename);
@@ -66,13 +69,13 @@ export async function fetchPacker(versionSpec: string): Promise<string> {
   const extractedPath = await tc.extractZip(downloadPath);
   core.debug(`Extracted path: ${extractedPath}`);
 
-  packerPath = await tc.cacheDir(extractedPath, cacheToolName, version);
-  core.info(`Cached Packer ${version} at ${packerPath}.`);
+  binaryPath = await tc.cacheDir(extractedPath, cacheToolName, version);
+  core.info(`Cached ` + BINARY_NAME + `_${version} at ${binaryPath}.`);
 
-  return packerPath;
+  return binaryPath;
 }
 
-export function parsePackerVersion(version: string): string {
+export function parseVersion(version: string): string {
   return version.split("\n")[0].split(" ")[1];
 }
 

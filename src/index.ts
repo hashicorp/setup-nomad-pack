@@ -1,9 +1,9 @@
 import * as core from "@actions/core";
-import {setupNomadPack} from "./setup-nomad-pack";
+import {setupBinary} from "./setup-binary";
 
 async function main() {
   try {
-    await setupNomadPack();
+    await setupBinary();
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message);

@@ -1,11 +1,13 @@
+---
+
 name: "Setup HashiCorp nomad-pack"
 author: "Kerim Satirli"
-description: "A GitHub Action to install a specific version of HashiCorp Packer and add it to PATH."
+description: "A GitHub Action to install a specific version of HashiCorp nomad-pack and add it to PATH."
 inputs:
   version:
     description: "The nomad-pack version to install and add to PATH. Supports semver versioning."
     required: true
-    default: "latest"
+    default: "0.0.1-techpreview2"
 outputs:
   version:
     description: "The nomad-pack version that was installed and added to PATH."

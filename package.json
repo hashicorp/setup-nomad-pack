@@ -1,6 +1,6 @@
 {
   "name": "setup-nomad-pack",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "A GitHub Action to install a specific version of HashiCorp Nomad-Pack and add it to PATH.",
   "main": "lib/index.js",
   "scripts": {

@@ -26,5 +26,9 @@
     "web": true
   },
 
-  "hooks": {}
+  "hooks": {},
+
+  "npm": {
+    "publish": false
+  }
 }

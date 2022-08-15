@@ -15,7 +15,7 @@ The `hashicorp/setup-nomad-pack` Action sets up the `nomad-pack` CLI in your Git
 
 This GitHub Actions supports all commands that are available in the `nomad-pack` CLI.
 
-The `run`, `destroy`, `info`, and `status` commands require access to a Nomad cluster, as defined through the environment variable `NOMAD_ADDR` (and optionally: `NOMAD_TOKEN`).
+The `run`, `destroy`, `info`, and `status` commands require access to a Nomad cluster, as defined through the environment variable `NOMAD_ADDR`. Other [environment variables](https://www.nomadproject.io/docs/commands#environment-variables) (such as `NOMAD_TOKEN`) may be set as normal and will be picked up accordingly.
 
 ## Usage
 
@@ -23,6 +23,8 @@ The `run`, `destroy`, `info`, and `status` commands require access to a Nomad cl
 
 - Set the `NOMAD_ADDR` to the IP-address or hostname of a Nomad cluster that is routable for GitHub Actions Runners.
 - Set the `NOMAD_TOKEN` to a token with appropriate permissions to carry out Pack-specific operations on a Nomad cluster.
+
+Optionally, set any and all [environment variables](https://www.nomadproject.io/docs/commands#environment-variables) as required for your Nomad cluster.
 
 > **Warning**
 > Running services such as Nomad on a publicly accessible port without authentication is a decidedly bad idea.

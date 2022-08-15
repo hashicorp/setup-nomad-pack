@@ -58,9 +58,11 @@ jobs:
           version: "0.0.1-techpreview2"
 
       - name: Run `nomad-pack info` for `simple_service`
+        id: info
         run: "nomad-pack info ./packs/simple_service"
 
       - name: Run `nomad-pack run` for `simple_service`
+        id: run
         run: "nomad-pack run ./packs/simple_service"
         env:
           NOMAD_ADDR: "${{ secrets.NOMAD_ADDR }}"
@@ -75,7 +77,9 @@ In the above example, the following definitions have been set.
 - The version of `nomad-pack` to set up has been set as `0.0.1-techpreview2`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad-pack/).
 - The pack to deploy has been set as `./packs/simple_service`
 
-These definitions may require updating to suit your deployment.
+These definitions may require updating to suit your deployment, such as specifying [self-hosted](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-self-hosted-runners) runners.
+
+Additionally, you may configure [outputs](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-defining-outputs-for-a-job) to consume return values from the Action's operations.
 
 ## Inputs
 

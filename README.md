@@ -50,7 +50,7 @@ jobs:
 
       - name: Setup `nomad-pack`
         # TODO: define `v1`
-        uses: ksatirli/setup-nomad-pack@0.1.3
+        uses: hashicorp/setup-nomad-pack@v1
         id: setup
         with:
           version: "0.0.1-techpreview2"
@@ -70,7 +70,7 @@ In the above example, the following definitions have been set.
 
 - The event trigger has been set to `push`. For a complete list, see [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows).
 - The origin of this GitHub Action has been set as `ksatirli/setup-nomad-pack@0.1.3`. For newer versions, see the [Releases](https://github.com/ksatirli/setup-nomad-pack/releases).
-- The version of `nomad-pack` to setup has been set as `0.0.1-techpreview2`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad-pack/).
+- The version of `nomad-pack` to set up has been set as `0.0.1-techpreview2`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad-pack/).
 - The pack to deploy has been set as `./packs/simple_service`
 
 These definitions may require updating to suit your deployment.

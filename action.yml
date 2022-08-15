@@ -1,6 +1,6 @@
 ---
 
-name: "Setup HashiCorp nomad-pack"
+name: "Setup HashiCorp Nomad Pack"
 author: "Kerim Satirli"
 description: "A GitHub Action to install a specific version of HashiCorp nomad-pack and add it to PATH."
 inputs:

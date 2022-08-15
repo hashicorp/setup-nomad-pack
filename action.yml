@@ -12,7 +12,7 @@ outputs:
   version:
     description: "The nomad-pack version that was installed and added to PATH."
 runs:
-  using: "node16"
+  using: "node18"
   main: "dist/index.js"
 branding:
   icon: "archive"

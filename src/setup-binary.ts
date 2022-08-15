@@ -7,8 +7,8 @@ import cp from "child_process";
 import path from "path";
 import {ok} from "assert";
 
-const USER_AGENT = "setup-nomad-pack (GitHub Actions)";
 const BINARY_NAME = "nomad-pack";
+const USER_AGENT = "setup-${BINARY_NAME} (GitHub Actions)";
 
 export async function setupBinary() {
   const versionSpec = core.getInput("version");

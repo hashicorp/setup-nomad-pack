@@ -1,0 +1,36 @@
+---
+name: "Security Scan: Snyk Code"
+
+on:
+  push:
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+
+    strategy:
+      # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategyfail-fast
+      fail-fast: false
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      # see https://github.com/snyk/actions/tree/master/node
+      - name: Lint Code with Snyk
+        uses: snyk/actions/node@master
+        env:
+          # see https://github.com/snyk/actions#getting-your-snyk-token
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          # see https://docs.snyk.io/products/snyk-infrastructure-as-code/snyk-cli-for-infrastructure-as-code/iac-ignores-using-the-.snyk-policy-file#policy-flags-and-policy-file-notes
+          args: --policy-path=.snyk --org=${{ secrets.SNYK_ORG }}
+          sarif: true
+
+#      # see https://github.com/github/codeql-action/tree/main/upload-sarif
+#      - name: Upload Snyk IaC results to GitHub Code Scanning
+#        uses: github/codeql-action/upload-sarif@v2
+#        with:
+#          sarif_file: snyk.sarif

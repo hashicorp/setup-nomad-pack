@@ -25,9 +25,8 @@ jobs:
           # see https://github.com/snyk/actions#getting-your-snyk-token
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          # see https://docs.snyk.io/products/snyk-infrastructure-as-code/snyk-cli-for-infrastructure-as-code/iac-ignores-using-the-.snyk-policy-file#policy-flags-and-policy-file-notes
-          args: --policy-path=.snyk --org=${{ secrets.SNYK_ORG }}
-          sarif: true
+          # see https://github.com/snyk/actions/tree/master/node#uploading-snyk-scan-results-to-github-code-scanning
+          args: --policy-path=.snyk --sarif-file-output=snyk.sarif --org=${{ secrets.SNYK_ORG }}
 
 #      # see https://github.com/github/codeql-action/tree/main/upload-sarif
 #      - name: Upload Snyk IaC results to GitHub Code Scanning

@@ -54,7 +54,7 @@ jobs:
 
       - name: Setup `nomad-pack`
         # TODO: define `v1`
-        uses: hashicorp/setup-nomad-pack@v1
+        uses: hashicorp/setup-nomad-pack@v0.9.2
         id: setup
         with:
           version: "0.0.1-techpreview2"
@@ -75,7 +75,7 @@ jobs:
 In the above example, the following definitions have been set.
 
 - The event trigger has been set to `push`. For a complete list, see [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows).
-- The origin of this GitHub Action has been set as `ksatirli/setup-nomad-pack@0.1.3`. For newer versions, see the [Releases](https://github.com/ksatirli/setup-nomad-pack/releases).
+- The origin of this GitHub Action has been set as `hashicorp/setup-nomad-pack@0.9.2`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad-pack/releases).
 - The version of `nomad-pack` to set up has been set as `0.0.1-techpreview2`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad-pack/).
 - The pack to deploy has been set as `./packs/simple_service`
 
@@ -97,7 +97,7 @@ This section contains a list of all outputs that can be consumed from this Actio
 
 ## Author Information
 
-This module is maintained by the contributors listed on [GitHub](https://github.com/ksatirli/setup-nomad-pack/graphs/contributors).
+This module is maintained by the contributors listed on [GitHub](https://github.com/hashicorp/setup-nomad-pack/graphs/contributors).
 
 The original code of this repository is based on work done by [Matthew Sanabria](https://github.com/sudomateo) as part of the [setup-packer](https://github.com/sudomateo/setup-packer) GitHub Action.
 

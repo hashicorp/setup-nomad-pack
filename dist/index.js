@@ -1,227 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 4822:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(2186));
-const setup_binary_1 = __nccwpck_require__(3486);
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield (0, setup_binary_1.setupBinary)();
-        }
-        catch (error) {
-            if (error instanceof Error) {
-                core.setFailed(error.message);
-            }
-        }
-    });
-}
-main();
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 3486:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parseVersion = exports.fetchBinary = exports.setupBinary = void 0;
-const core = __importStar(__nccwpck_require__(2186));
-const hc = __importStar(__nccwpck_require__(9947));
-const io = __importStar(__nccwpck_require__(7436));
-const tc = __importStar(__nccwpck_require__(7784));
-const sys = __importStar(__nccwpck_require__(5785));
-const child_process_1 = __importDefault(__nccwpck_require__(2081));
-const path_1 = __importDefault(__nccwpck_require__(1017));
-const assert_1 = __nccwpck_require__(9491);
-const BINARY_NAME = "nomad-pack";
-const USER_AGENT = "setup-${BINARY_NAME} (GitHub Actions)";
-function setupBinary() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const versionSpec = core.getInput("version");
-        let binaryPath = yield fetchBinary(versionSpec);
-        core.info(`Adding ` + BINARY_NAME + ` to PATH.`);
-        core.addPath(binaryPath);
-        let binary = yield io.which(BINARY_NAME);
-        let binaryVersion = (child_process_1.default.execSync(`${binary} version`) || "").toString();
-        core.info(binaryVersion);
-        core.setOutput("version", parseVersion(binaryVersion));
-    });
-}
-exports.setupBinary = setupBinary;
-function fetchBinary(versionSpec) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const osPlatform = sys.getPlatform();
-        const osArch = sys.getArch();
-        const tmpDir = getTempDir();
-        let binaryPath;
-        core.info(`Finding an application version that matches version spec '${versionSpec}'.`);
-        let release = yield hc.getRelease(BINARY_NAME, versionSpec, USER_AGENT);
-        const version = release.version;
-        core.info(`Found ` + BINARY_NAME + ` ${version}.`);
-        core.info(`Checking cache for ` + BINARY_NAME + ` ${version}.`);
-        const cacheToolName = BINARY_NAME + `_${osPlatform}`;
-        binaryPath = tc.find(cacheToolName, version);
-        core.debug(`Cache tool name: ${cacheToolName}`);
-        if (binaryPath) {
-            core.info(`Found ` + BINARY_NAME + ` ${version} in cache at ${binaryPath}.`);
-            return binaryPath;
-        }
-        core.info(BINARY_NAME + ` ${version} not found in cache.`);
-        core.info(`Getting download URL for ` + BINARY_NAME + ` ${version}.`);
-        let build = release.getBuild(osPlatform, osArch);
-        core.debug(`Download URL: ${build.url}`);
-        core.info(`Downloading ${build.filename}.`);
-        let downloadPath = path_1.default.join(tmpDir, build.filename);
-        yield release.download(build.url, downloadPath, USER_AGENT);
-        core.debug(`Download path: ${downloadPath}`);
-        core.info(`Verifying ${build.filename}.`);
-        yield release.verify(downloadPath, build.filename);
-        core.info(`Extracting ${build.filename}.`);
-        const extractedPath = yield tc.extractZip(downloadPath);
-        core.debug(`Extracted path: ${extractedPath}`);
-        binaryPath = yield tc.cacheDir(extractedPath, cacheToolName, version);
-        core.info(`Cached ` + BINARY_NAME + `_${version} at ${binaryPath}.`);
-        return binaryPath;
-    });
-}
-exports.fetchBinary = fetchBinary;
-function parseVersion(version) {
-    return version.split("\n")[0].split(" ")[1];
-}
-exports.parseVersion = parseVersion;
-function getTempDir() {
-    const tmpDir = process.env["RUNNER_TEMP"] || "";
-    (0, assert_1.ok)(tmpDir, "Expected RUNNER_TEMP to be defined");
-    return tmpDir;
-}
-//# sourceMappingURL=setup-binary.js.map
-
-/***/ }),
-
-/***/ 5785:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getArch = exports.getPlatform = void 0;
-const os_1 = __importDefault(__nccwpck_require__(2037));
-function getPlatform() {
-    const platform = os_1.default.platform();
-    switch (platform) {
-        case "darwin":
-            return "darwin";
-        case "freebsd":
-            return "freebsd";
-        case "linux":
-            return "linux";
-        case "openbsd":
-            return "openbsd";
-        case "win32":
-            return "windows";
-        default:
-            throw new Error(`Unsupported operating system platform: ${platform}`);
-    }
-}
-exports.getPlatform = getPlatform;
-function getArch() {
-    const arch = os_1.default.arch();
-    switch (arch) {
-        case "arm":
-            return "arm";
-        case "arm64":
-            return "arm64";
-        case "x32":
-            return "386";
-        case "x64":
-            return "amd64";
-        default:
-            throw new Error(`Unsupported operating system architecture: ${arch}`);
-    }
-}
-exports.getArch = getArch;
-//# sourceMappingURL=system.js.map
-
-/***/ }),
-
 /***/ 7351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -21612,6 +21391,228 @@ function defaultCallback(err) {
 
 /***/ }),
 
+/***/ 6144:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core = __importStar(__nccwpck_require__(2186));
+const setup_binary_1 = __nccwpck_require__(2101);
+function main() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield (0, setup_binary_1.setupBinary)();
+        }
+        catch (error) {
+            if (error instanceof Error) {
+                core.setFailed(error.message);
+            }
+        }
+    });
+}
+main();
+
+
+/***/ }),
+
+/***/ 2101:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parseVersion = exports.fetchBinary = exports.setupBinary = void 0;
+const core = __importStar(__nccwpck_require__(2186));
+const hc = __importStar(__nccwpck_require__(9947));
+const io = __importStar(__nccwpck_require__(7436));
+const cache = __importStar(__nccwpck_require__(7784));
+const sys = __importStar(__nccwpck_require__(5632));
+const child_process_1 = __importDefault(__nccwpck_require__(2081));
+const path_1 = __importDefault(__nccwpck_require__(1017));
+const assert_1 = __nccwpck_require__(9491);
+const BINARY_NAME = "nomad-pack";
+const USER_AGENT = "setup-${BINARY_NAME} (GitHub Actions)";
+function setupBinary() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const versionSpec = core.getInput("version");
+        let binaryPath = yield fetchBinary(versionSpec);
+        core.info(`Adding ` + BINARY_NAME + ` to PATH.`);
+        core.addPath(binaryPath);
+        let binary = yield io.which(BINARY_NAME);
+        let binaryVersion = (child_process_1.default.execSync(`${binary} version`) || "").toString();
+        core.info(binaryVersion);
+        core.setOutput("version", parseVersion(binaryVersion));
+    });
+}
+exports.setupBinary = setupBinary;
+function fetchBinary(versionSpec) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const osPlatform = sys.getPlatform();
+        const osArch = sys.getArch();
+        const tmpDir = getTempDir();
+        let binaryPath;
+        core.info(`Finding application version that matches ${versionSpec}.`);
+        let release = yield hc.getRelease(BINARY_NAME, versionSpec, USER_AGENT);
+        let version = release.version;
+        let nameAndVersion = BINARY_NAME + ` ${version}`;
+        let nameAndPlatform = BINARY_NAME + `_${osPlatform}`;
+        core.info(`Found ${nameAndVersion}.`);
+        core.info(`Checking cache for ${nameAndVersion}.`);
+        binaryPath = cache.find(nameAndPlatform, version);
+        core.debug(`Cache binary: ${nameAndPlatform}`);
+        if (binaryPath) {
+            core.info(`Found ${nameAndVersion} in cache at ${binaryPath}.`);
+            return binaryPath;
+        }
+        core.info(`${nameAndVersion} not found in cache.`);
+        core.info(`Getting download URL for ${nameAndVersion}.`);
+        let build = release.getBuild(osPlatform, osArch);
+        core.debug(`Download URL: ${build.url}`);
+        core.info(`Downloading ${build.filename}.`);
+        let downloadPath = path_1.default.join(tmpDir, build.filename);
+        core.debug(`Download path: ${downloadPath}`);
+        yield release.download(build.url, downloadPath, USER_AGENT);
+        core.info(`Verifying ${build.filename}.`);
+        yield release.verify(downloadPath, build.filename);
+        core.info(`Extracting ${build.filename}.`);
+        const extractedPath = yield cache.extractZip(downloadPath);
+        core.debug(`Extracted path: ${extractedPath}`);
+        binaryPath = yield cache.cacheDir(extractedPath, nameAndPlatform, version);
+        core.info(`Cached ${nameAndVersion} at ${binaryPath}.`);
+        return binaryPath;
+    });
+}
+exports.fetchBinary = fetchBinary;
+function parseVersion(version) {
+    return version.split("\n")[0].split(" ")[1];
+}
+exports.parseVersion = parseVersion;
+function getTempDir() {
+    const tmpDir = process.env["RUNNER_TEMP"] || "";
+    (0, assert_1.ok)(tmpDir, "Expected RUNNER_TEMP to be defined");
+    return tmpDir;
+}
+
+
+/***/ }),
+
+/***/ 5632:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getArch = exports.getPlatform = void 0;
+const os_1 = __importDefault(__nccwpck_require__(2037));
+function getPlatform() {
+    const platform = os_1.default.platform();
+    switch (platform) {
+        case "darwin":
+            return "darwin";
+        case "freebsd":
+            return "freebsd";
+        case "linux":
+            return "linux";
+        case "openbsd":
+            return "openbsd";
+        case "win32":
+            return "windows";
+        default:
+            throw new Error(`Unsupported operating system platform: ${platform}`);
+    }
+}
+exports.getPlatform = getPlatform;
+function getArch() {
+    const arch = os_1.default.arch();
+    switch (arch) {
+        case "arm":
+            return "arm";
+        case "arm64":
+            return "arm64";
+        case "x32":
+            return "386";
+        case "x64":
+            return "amd64";
+        default:
+            throw new Error(`Unsupported operating system architecture: ${arch}`);
+    }
+}
+exports.getArch = getArch;
+
+
+/***/ }),
+
 /***/ 132:
 /***/ ((module) => {
 
@@ -21826,7 +21827,7 @@ module.exports = require("zlib");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(4822);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(6144);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()

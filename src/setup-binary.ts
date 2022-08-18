@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import * as hc from "@hashicorp/js-releases";
 import * as io from "@actions/io";
-import * as tc from "@actions/tool-cache";
+import * as cache from "@actions/tool-cache";
 import * as sys from "./system";
 import cp from "child_process";
 import path from "path";
@@ -44,7 +44,7 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
 
   core.info(`Checking cache for ${nameAndVersion}.`);
 
-  binaryPath = tc.find(nameAndPlatform, version);
+  binaryPath = cache.find(nameAndPlatform, version);
   core.debug(`Cache binary: ${nameAndPlatform}`);
 
   if (binaryPath) {
@@ -68,10 +68,10 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
   await release.verify(downloadPath, build.filename);
 
   core.info(`Extracting ${build.filename}.`);
-  const extractedPath = await tc.extractZip(downloadPath);
+  const extractedPath = await cache.extractZip(downloadPath);
   core.debug(`Extracted path: ${extractedPath}`);
 
-  binaryPath = await tc.cacheDir(extractedPath, nameAndPlatform, version);
+  binaryPath = await cache.cacheDir(extractedPath, nameAndPlatform, version);
   core.info(`Cached ${nameAndVersion} at ${binaryPath}.`);
 
   return binaryPath;

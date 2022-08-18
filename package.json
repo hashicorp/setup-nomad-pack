@@ -1,7 +1,7 @@
 {
   "name": "setup-nomad-pack",
   "version": "0.9.1",
-  "description": "A GitHub Action to install a specific version of HashiCorp Nomad-Pack and add it to PATH.",
+  "description": "A GitHub Action to install a specific version of HashiCorp Nomad Pack and add it to PATH.",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc && ncc build --no-cache",

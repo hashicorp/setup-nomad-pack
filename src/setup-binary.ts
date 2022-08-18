@@ -37,12 +37,15 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
   let release = await hc.getRelease(BINARY_NAME, versionSpec, USER_AGENT);
 
   let version = release.version;
-  core.info(`Found ` + BINARY_NAME + ` ${version}.`);
+  let nameAndVersion = BINARY_NAME + ` ${version}`;
+  let nameAndPlatform = BINARY_NAME + `_${osPlatform}`;
 
-  core.info(`Checking cache for ` + BINARY_NAME + ` ${version}.`);
-  let cacheToolName = BINARY_NAME + `_${osPlatform}`;
-  binaryPath = tc.find(cacheToolName, version);
-  core.debug(`Cache tool name: ${cacheToolName}`);
+  core.info(`Found ${nameAndVersion}.`);
+
+  core.info(`Checking cache for ${nameAndVersion}.`);
+
+  binaryPath = tc.find(nameAndPlatform, version);
+  core.debug(`Cache binary: ${nameAndPlatform}`);
 
   if (binaryPath) {
     core.info(

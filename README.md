@@ -1,10 +1,10 @@
-# setup-nomad-pack
+# GitHub Action: setup-nomad-pack
 
 The `hashicorp/setup-nomad-pack` Action sets up the `nomad-pack` CLI in your GitHub Actions workflow by adding the binary to `PATH`.
 
 ## Table of Contents
 
-- [setup-nomad-pack](#setup-nomad-pack)
+- [GitHub Action: setup-nomad-pack](#github-action-setup-nomad-pack)
   - [Table of Contents](#table-of-contents)
   - [Requirements](#requirements)
   - [Usage](#usage)

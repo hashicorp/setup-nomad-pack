@@ -20,8 +20,8 @@ export async function setupBinary() {
 
   let binary = await io.which(BINARY_NAME);
   let binaryVersion = (cp.execSync(`${binary} version`) || "").toString();
-  core.info(binaryVersion);
 
+  core.info(binaryVersion);
   core.setOutput("version", parseVersion(binaryVersion));
 }
 
@@ -32,8 +32,7 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
 
   let binaryPath: string;
 
-  core.info(`Finding application version that matches ${versionSpec}.`);
-
+  core.info(`Finding release that matches ${versionSpec}.`);
   let release = await hc.getRelease(BINARY_NAME, versionSpec, USER_AGENT);
 
   let version = release.version;
@@ -44,8 +43,8 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
 
   core.info(`Checking cache for ${nameAndVersion}.`);
 
-  binaryPath = cache.find(nameAndPlatform, version);
   core.debug(`Cache binary: ${nameAndPlatform}`);
+  binaryPath = cache.find(nameAndPlatform, version);
 
   if (binaryPath) {
     core.info(`Found ${nameAndVersion} in cache at ${binaryPath}.`);

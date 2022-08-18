@@ -21519,15 +21519,15 @@ function fetchBinary(versionSpec) {
         const osArch = sys.getArch();
         const tmpDir = getTempDir();
         let binaryPath;
-        core.info(`Finding application version that matches ${versionSpec}.`);
+        core.info(`Finding release that matches ${versionSpec}.`);
         let release = yield hc.getRelease(BINARY_NAME, versionSpec, USER_AGENT);
         let version = release.version;
         let nameAndVersion = BINARY_NAME + ` ${version}`;
         let nameAndPlatform = BINARY_NAME + `_${osPlatform}`;
         core.info(`Found ${nameAndVersion}.`);
         core.info(`Checking cache for ${nameAndVersion}.`);
-        binaryPath = cache.find(nameAndPlatform, version);
         core.debug(`Cache binary: ${nameAndPlatform}`);
+        binaryPath = cache.find(nameAndPlatform, version);
         if (binaryPath) {
             core.info(`Found ${nameAndVersion} in cache at ${binaryPath}.`);
             return binaryPath;

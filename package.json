@@ -4,7 +4,7 @@
   "description": "A GitHub Action to install a specific version of HashiCorp Nomad-Pack and add it to PATH.",
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc && ncc build --license=LICENSE",
+    "build": "tsc && ncc build --no-cache",
     "fmt": "prettier --write **/*.ts"
   },
   "repository": {

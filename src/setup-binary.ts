@@ -48,15 +48,13 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
   core.debug(`Cache binary: ${nameAndPlatform}`);
 
   if (binaryPath) {
-    core.info(
-      `Found ` + BINARY_NAME + ` ${version} in cache at ${binaryPath}.`
-    );
+    core.info(`Found ${nameAndVersion} in cache at ${binaryPath}.`);
     return binaryPath;
   }
 
-  core.info(BINARY_NAME + ` ${version} not found in cache.`);
+  core.info(`${nameAndVersion} not found in cache.`);
 
-  core.info(`Getting download URL for ` + BINARY_NAME + ` ${version}.`);
+  core.info(`Getting download URL for ${nameAndVersion}.`);
   let build = release.getBuild(osPlatform, osArch);
   core.debug(`Download URL: ${build.url}`);
 
@@ -73,8 +71,8 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
   const extractedPath = await tc.extractZip(downloadPath);
   core.debug(`Extracted path: ${extractedPath}`);
 
-  binaryPath = await tc.cacheDir(extractedPath, cacheToolName, version);
-  core.info(`Cached ` + BINARY_NAME + `_${version} at ${binaryPath}.`);
+  binaryPath = await tc.cacheDir(extractedPath, nameAndPlatform, version);
+  core.info(`Cached ${nameAndVersion} at ${binaryPath}.`);
 
   return binaryPath;
 }

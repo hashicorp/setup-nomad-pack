@@ -57,7 +57,7 @@ jobs:
         uses: hashicorp/setup-nomad-pack@v0.9.2
         id: setup
         with:
-          version: "0.0.1-techpreview2"
+          version: "0.0.1-techpreview2" # or `latest`
 
       - name: Run `nomad-pack info` for `simple_service`
         id: info
@@ -87,7 +87,7 @@ Additionally, you may configure [outputs](https://docs.github.com/en/actions/usi
 
 This section contains a list of all inputs that may be set for this Action.
 
-- `version` - (required) The version of `nomad-pack` to install. Supports [semver](https://www.npmjs.com/package/semver) versioning. Defaults to `0.0.1-techpreview2`.
+- `version` - (required) The version of `nomad-pack` to install. Supports [semver](https://www.npmjs.com/package/semver) versioning. Defaults to `latest`.
 
 ## Outputs
 

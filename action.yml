@@ -7,7 +7,7 @@ inputs:
   version:
     description: "The Nomad Pack version to install and add to PATH."
     required: true
-    default: "0.0.1-techpreview2"
+    default: "latest"
 outputs:
   version:
     description: "The Nomad Pack version that was installed and added to PATH."

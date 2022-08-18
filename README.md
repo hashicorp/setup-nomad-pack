@@ -36,7 +36,7 @@ Optionally, set any and all [environment variables](https://www.nomadproject.io/
 <small>GitHub Actions run on a publicly-known list of [IP addresses](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#ip-addresses).
 This data may be retrieved through [HashiCorp Terraform](https://terraform.io/), using the [ip_ranges data source](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/ip_ranges), allowing you to make IP-address _one_ of the security considerations.</small>
 
-2.) Create a GitHub Actions Workflow file (e.g.: `.github/workflows/nomad-pack.yml):
+2.) Create a GitHub Actions Workflow file (e.g.: `.github/workflows/nomad-pack.yml`):
 
 ```yaml
 name: nomad-pack

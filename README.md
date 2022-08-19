@@ -97,7 +97,7 @@ This section contains a list of all outputs that can be consumed from this Actio
 
 ## Author Information
 
-This module is maintained by the contributors listed on [GitHub](https://github.com/hashicorp/setup-nomad-pack/graphs/contributors).
+This GitHub Action is maintained by the contributors listed on [GitHub](https://github.com/hashicorp/setup-nomad-pack/graphs/contributors).
 
 The original code of this repository is based on work done by [Matthew Sanabria](https://github.com/sudomateo) as part of the [setup-packer](https://github.com/sudomateo/setup-packer) GitHub Action.
 

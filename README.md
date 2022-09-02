@@ -1,10 +1,10 @@
-# setup-nomad-pack
+# GitHub Action: setup-nomad-pack
 
 The `hashicorp/setup-nomad-pack` Action sets up the `nomad-pack` CLI in your GitHub Actions workflow by adding the binary to `PATH`.
 
 ## Table of Contents
 
-- [setup-nomad-pack](#setup-nomad-pack)
+- [GitHub Action: setup-nomad-pack](#github-action-setup-nomad-pack)
   - [Table of Contents](#table-of-contents)
   - [Requirements](#requirements)
   - [Usage](#usage)
@@ -36,7 +36,7 @@ Optionally, set any and all [environment variables](https://www.nomadproject.io/
 <small>GitHub Actions run on a publicly-known list of [IP addresses](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#ip-addresses).
 This data may be retrieved through [HashiCorp Terraform](https://terraform.io/), using the [ip_ranges data source](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/ip_ranges), allowing you to make IP-address _one_ of the security considerations.</small>
 
-2.) Create a GitHub Actions Workflow file (e.g.: `.github/workflows/nomad-pack.yml):
+2.) Create a GitHub Actions Workflow file (e.g.: `.github/workflows/nomad-pack.yml`):
 
 ```yaml
 name: nomad-pack
@@ -57,7 +57,7 @@ jobs:
         uses: hashicorp/setup-nomad-pack@v0.9.2
         id: setup
         with:
-          version: "0.0.1-techpreview2"
+          version: "0.0.1-techpreview2" # or `latest`
 
       - name: Run `nomad-pack info` for `simple_service`
         id: info
@@ -87,7 +87,7 @@ Additionally, you may configure [outputs](https://docs.github.com/en/actions/usi
 
 This section contains a list of all inputs that may be set for this Action.
 
-- `version` - (required) The version of `nomad-pack` to install. Supports [semver](https://www.npmjs.com/package/semver) versioning. Defaults to `0.0.1-techpreview2`.
+- `version` - (required) The version of `nomad-pack` to install. Supports [semver](https://www.npmjs.com/package/semver) versioning. Defaults to `latest`.
 
 ## Outputs
 
@@ -97,7 +97,7 @@ This section contains a list of all outputs that can be consumed from this Actio
 
 ## Author Information
 
-This module is maintained by the contributors listed on [GitHub](https://github.com/hashicorp/setup-nomad-pack/graphs/contributors).
+This GitHub Action is maintained by the contributors listed on [GitHub](https://github.com/hashicorp/setup-nomad-pack/graphs/contributors).
 
 The original code of this repository is based on work done by [Matthew Sanabria](https://github.com/sudomateo) as part of the [setup-packer](https://github.com/sudomateo/setup-packer) GitHub Action.
 

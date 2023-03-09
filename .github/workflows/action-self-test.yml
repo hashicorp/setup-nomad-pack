@@ -24,7 +24,7 @@ jobs:
         run: nomad-pack version
 
       - name: Validate `nomad-pack` version is accurate
-        run: "nomad-pack version | grep --silent 'Nomad Pack v0.0.1-techpreview.3'"
+        run: "nomad-pack version | grep --silent 'Nomad Pack v0.0.1-techpreview.3 (3b4163b)'"
 
       - name: Run `nomad-pack render`
         run: nomad-pack render "${{ github.action_path }}/test/"

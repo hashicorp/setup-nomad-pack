@@ -13,7 +13,7 @@ async function main() {
     return;
   }
   try {
-    await hc.getHashicorpRelease("nomad-pack", version);
+    await hc.getHashicorpRelease("ranch", version);
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message);

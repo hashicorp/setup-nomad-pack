@@ -43,6 +43,8 @@ jobs:
       - name: Setup `nomad-pack` with `latest` version (using local GitHub Action)
         uses: "./"
         id: latest_version
+        with:
+            version: "latest"
 
       - name: Print `nomad-pack` version
         run: nomad-pack version

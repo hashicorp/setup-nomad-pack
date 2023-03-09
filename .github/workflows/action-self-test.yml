@@ -15,7 +15,7 @@ jobs:
         uses: "./"
         id: setup
         with:
-          version: "0.0.1-techpreview2"
+          version: "0.0.1-techpreview.3"
 
       - name: Print `$PATH` for `nomad-pack`
         run: which nomad-pack
@@ -24,7 +24,7 @@ jobs:
         run: nomad-pack version
 
       - name: Validate `nomad-pack` version is accurate
-        run: "nomad-pack version | grep --silent 'Nomad Pack v0.0.1-techpreview.2'"
+        run: "nomad-pack version | grep --silent 'Nomad Pack v0.0.1-techpreview.3'"
 
       - name: Run `nomad-pack render`
         run: nomad-pack render "${{ github.action_path }}/test/"

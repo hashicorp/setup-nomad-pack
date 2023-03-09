@@ -1,0 +1,48 @@
+name: "GitHub Action: Self-Test"
+
+on:
+  push:
+
+jobs:
+  setup-nomad-pack:
+    runs-on: ubuntu-latest
+    name: Test `setup-nomad-pack`
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup `nomad-pack` (using local GitHub Action)
+        uses: "./"
+        id: setup
+        with:
+          version: "0.0.1-techpreview2"
+
+      - name: Print `$PATH` for `nomad-pack`
+        run: which nomad-pack
+
+      - name: Print `nomad-pack` version
+        run: nomad-pack version
+
+      - name: Validate `nomad-pack` version is accurate
+        run: "nomad-pack version | grep --silent 'Nomad Pack v0.0.1-techpreview.2'"
+
+      - name: Run `nomad-pack render`
+        run: nomad-pack render "${{ github.action_path }}/test/"
+
+      - name: Setup `nomad-pack` with an invalid version (using local GitHub Action)
+        uses: "./"
+        id: invalid_version
+        with:
+          version: "invalid_version"
+        continue-on-error: true
+
+      - name: Validate invalid version failed
+        if: steps.invalid_version.outcome == 'success'
+        run: echo "Installing an invalid version expected to fail but did not" && exit 1
+
+      - name: Setup `nomad-pack` with `latest` version (using local GitHub Action)
+        uses: "./"
+        id: latest_version
+
+      - name: Print `nomad-pack` version
+        run: nomad-pack version

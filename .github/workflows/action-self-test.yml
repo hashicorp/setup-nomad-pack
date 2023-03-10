@@ -40,11 +40,12 @@ jobs:
         if: steps.invalid_version.outcome == 'success'
         run: echo "Installing an invalid version expected to fail but did not" && exit 1
 
-      - name: Setup `nomad-pack` with `latest` version (using local GitHub Action)
-        uses: "./"
-        id: latest_version
-        with:
-            version: "latest"
+# Testing against `latest` doesn't work with pre-release versions, so this is temporarily disabled:
+#      - name: Setup `nomad-pack` with `latest` version (using local GitHub Action)
+#        uses: "./"
+#        id: latest_version
+#        with:
+#            version: "latest"
 
       - name: Print `nomad-pack` version
         run: nomad-pack version

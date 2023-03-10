@@ -28,7 +28,7 @@ jobs:
         run: nomad-pack version
 
       - name: Validate `nomad-pack` version is accurate
-        run: "nomad-pack version | grep --silent 'Nomad Pack v${{ env.PRODUCT_VERSION }} (${{ env.PRODUCT_VERSION }})'"
+        run: "nomad-pack version | grep --silent 'Nomad Pack v${{ env.PRODUCT_VERSION }} (${{ env.PRODUCT_HASH }})'"
 
       - name: Run `nomad-pack render`
         run: nomad-pack render "./test/"

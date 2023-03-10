@@ -48,6 +48,9 @@ name: nomad-pack
 on:
   - push
 
+env:
+  PRODUCT_VERSION: "0.0.1-techpreview.3" # or: "latest"
+
 jobs:
   setup-nomad-pack:
     runs-on: ubuntu-latest
@@ -60,7 +63,7 @@ jobs:
         uses: hashicorp/setup-nomad-pack@v1.0.0
         id: setup
         with:
-          version: "0.0.1-techpreview.3" # or `latest`
+          version: ${{ env.PRODUCT_VERSION }}
 
       - name: Run `nomad-pack info` for `./test`
         id: info

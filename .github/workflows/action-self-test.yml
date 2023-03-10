@@ -3,6 +3,10 @@ name: "GitHub Action: Self-Test"
 on:
   push:
 
+env:
+  PRODUCT_VERSION: "0.0.1-techpreview.3"
+  PRODUCT_HASH: "3b4163b"
+
 jobs:
   setup-nomad-pack:
     runs-on: ubuntu-latest
@@ -15,7 +19,7 @@ jobs:
         uses: "./"
         id: setup
         with:
-          version: "0.0.1-techpreview.3"
+          version: $PRODUCT_VERSION
 
       - name: Print `$PATH` for `nomad-pack`
         run: which nomad-pack
@@ -24,7 +28,7 @@ jobs:
         run: nomad-pack version
 
       - name: Validate `nomad-pack` version is accurate
-        run: "nomad-pack version | grep --silent 'Nomad Pack v0.0.1-techpreview.3 (3b4163b)'"
+        run: "nomad-pack version | grep --silent 'Nomad Pack v${$PRODUCT_VERSION} (${PRODUCT_HASH})'"
 
       - name: Run `nomad-pack render`
         run: nomad-pack render "./test/"

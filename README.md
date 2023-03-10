@@ -2,6 +2,8 @@
 
 The `hashicorp/setup-nomad-pack` Action sets up the [Nomad Pack](https://developer.hashicorp.com/nomad/tutorials/nomad-pack/nomad-pack-intro) CLI in your GitHub Actions workflow by adding the `nomad-pack` binary to `PATH`.
 
+[![GitHub Action: Self-Test](https://github.com/hashicorp/setup-nomad-pack/actions/workflows/actions-self-test.yml/badge.svg?branch=main)](https://github.com/hashicorp/setup-nomad-pack/actions/workflows/actions-self-test.yml)
+
 ## Table of Contents
 
 <!-- TOC -->

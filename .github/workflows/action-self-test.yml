@@ -9,8 +9,9 @@ env:
 
 jobs:
   setup-nomad-pack:
-    runs-on: ubuntu-latest
     name: Test `setup-nomad-pack`
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3

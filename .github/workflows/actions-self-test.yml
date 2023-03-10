@@ -32,7 +32,7 @@ jobs:
         run: "nomad-pack version | grep --silent 'Nomad Pack v${{ env.PRODUCT_VERSION }} (${{ env.PRODUCT_HASH }})'"
 
       - name: Run `nomad-pack render`
-        run: nomad-pack render "./test/"
+        run: nomad-pack render --auto-approve "./test/"
 
       - name: Setup `nomad-pack` with an invalid version (using local GitHub Action)
         uses: "./"

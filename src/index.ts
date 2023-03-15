@@ -4,11 +4,16 @@
  */
 
 import * as core from "@actions/core";
-import {setupBinary} from "./setup-binary";
+import * as hc from "@hashicorp/github-actions-core";
 
 async function main() {
+  const version = core.getInput("version");
+  if (version == null) {
+    core.setFailed("Required field 'version' not set");
+    return;
+  }
   try {
-    await setupBinary();
+    await hc.getHashicorpRelease("nomad-pack", version);
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message);

@@ -14,13 +14,13 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
         with:
           fetch-depth: 1
 
       # see https://github.com/snyk/actions/tree/master/node
       - name: Lint Code with Snyk
-        uses: snyk/actions/node@master
+        uses: snyk/actions/node@master # TSCCR: no entry for repository "snyk/actions"
         env:
           # see https://github.com/snyk/actions#getting-your-snyk-token
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

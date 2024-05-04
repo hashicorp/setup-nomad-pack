@@ -7,7 +7,7 @@ The `hashicorp/setup-nomad-pack` Action sets up the [Nomad Pack](https://develop
 ## Table of Contents
 
 <!-- TOC -->
-* [GitHub Action: `setup-nomad-pack`](#github-action--setup-nomad-pack)
+* [GitHub Action: `setup-nomad-pack`](#github-action-setup-nomad-pack)
   * [Table of Contents](#table-of-contents)
   * [Requirements](#requirements)
   * [Usage](#usage)
@@ -35,7 +35,7 @@ Other [environment variables](https://developer.hashicorp.com/nomad/docs/command
 Optionally, set any and all [environment variables](https://developer.hashicorp.com/nomad/docs/commands#environment-variables) as required for your Nomad cluster.
 
 > **Warning**
-> Running services such as Nomad on a publicly accessible port without authentication is a decidedly bad idea.
+> Running services such as Nomad on a publicly accessible port without authentication may be harmful.
 >
 > Consult with your security team to define an access policy that meets your organization's security demands.
 
@@ -48,10 +48,10 @@ This data may be retrieved through [HashiCorp Terraform](https://terraform.io/),
 name: nomad-pack
 
 on:
-  - push
+  push:
 
 env:
-  PRODUCT_VERSION: "0.0.1-techpreview.3"
+  PRODUCT_VERSION: "0.1.1"
 
 jobs:
   setup-nomad-pack:
@@ -59,10 +59,10 @@ jobs:
     name: Run Nomad Pack
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup `nomad-pack`
-        uses: hashicorp/setup-nomad-pack@v1.0.0
+        uses: hashicorp/setup-nomad-pack@main
         id: setup
         with:
           version: ${{ env.PRODUCT_VERSION }}
@@ -87,8 +87,8 @@ jobs:
 In the above example, the following definitions have been set.
 
 - The event trigger has been set to `push`. For a complete list, see [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows).
-- The origin of this GitHub Action has been set as `hashicorp/setup-nomad-pack@1.0.0`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad-pack/releases).
-- The version of `nomad-pack` to set up has been set as `0.0.1-techpreview.3`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad-pack/).
+- The origin of this GitHub Action has been set as `hashicorp/setup-nomad-pack@main`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad-pack/releases).
+- The version of `nomad-pack` to set up has been set as `0.1.1`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad-pack/).
 - The pack to interact with has been set to `./test`
 
 These definitions may require updating to suit your deployment, such as specifying [self-hosted](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-self-hosted-runners) runners.
@@ -110,8 +110,6 @@ This section contains a list of all outputs that can be consumed from this Actio
 ## Author Information
 
 This GitHub Action is maintained by the contributors listed on [GitHub](https://github.com/hashicorp/setup-nomad-pack/graphs/contributors).
-
-The original code of this repository is based on work done by [Matthew Sanabria](https://github.com/sudomateo) as part of the [setup-packer](https://github.com/sudomateo/setup-packer) GitHub Action.
 
 ## License
 

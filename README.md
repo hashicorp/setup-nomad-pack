@@ -51,7 +51,7 @@ on:
   - push
 
 env:
-  PRODUCT_VERSION: "0.0.1-techpreview.3" # or: "latest"
+  PRODUCT_VERSION: "0.0.1-techpreview.3"
 
 jobs:
   setup-nomad-pack:

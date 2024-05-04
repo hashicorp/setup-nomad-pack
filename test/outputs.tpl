@@ -1,1 +1,1 @@
-Congrats! You deployed the self-test pack on Nomad.
+Congrats! You deployed the test pack on Nomad.

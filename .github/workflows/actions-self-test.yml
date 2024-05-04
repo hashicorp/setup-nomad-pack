@@ -5,7 +5,7 @@ on:
 
 env:
   PRODUCT_VERSION: "0.1.1"
-  PRODUCT_HASH: "3b4163b"
+  PRODUCT_HASH: "5159a77"
 
 jobs:
   setup-nomad-pack:

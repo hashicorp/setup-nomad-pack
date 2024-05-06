@@ -39,8 +39,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PRODUCT = void 0;
 const core = __importStar(__nccwpck_require__(6024));
 const hc = __importStar(__nccwpck_require__(2999));
+exports.PRODUCT = "nomad-pack";
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const version = core.getInput("version");
@@ -49,7 +51,7 @@ function main() {
             return;
         }
         try {
-            yield hc.getHashicorpRelease("nomad-pack", version);
+            yield hc.getHashicorpRelease(exports.PRODUCT, version);
         }
         catch (error) {
             if (error instanceof Error) {
@@ -620,7 +622,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {

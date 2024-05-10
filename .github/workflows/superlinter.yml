@@ -21,6 +21,7 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: "main"
           DISABLE_ERRORS: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JAVASCRIPT_DEFAULT_STYLE: "prettier"
           VALIDATE_JSON: true
           VALIDATE_MD: true

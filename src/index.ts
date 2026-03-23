@@ -1,5 +1,5 @@
 /**
- * Copyright (c) HashiCorp, Inc.
+ * Copyright HashiCorp, Inc. 2022, 2026
  * SPDX-License-Identifier: Apache-2.0
  */
 
